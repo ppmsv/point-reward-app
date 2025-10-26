@@ -1,0 +1,12 @@
+{
+  "extends": "./.nuxt/tsconfig.json",
+  "compilerOptions": {
+    "types": ["nuxt", "node"]
+  },
+  "exclude": [
+    ".nuxt",
+    "node_modules",
+    "dist",
+    "pages/reward"   
+  ]
+}

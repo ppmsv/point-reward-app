@@ -1,0 +1,23 @@
+# Node dependencies
+node_modules/
+
+# Nuxt build / output
+.nuxt/
+.nitro/
+.output/
+dist/
+
+# Logs
+logs/
+*.log
+
+# OS / IDE files
+.DS_Store
+.idea/
+.vscode/
+.fleet
+
+# Local environment files
+.env
+.env.*
+!.env.example
