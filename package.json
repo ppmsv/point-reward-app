@@ -3,22 +3,28 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "build": "nuxt build",
     "dev": "nuxt dev",
-    "generate": "nuxt generate",
-    "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "build": "nuxt build",
+    "preview": "nuxt preview"
   },
   "dependencies": {
+    "@nuxt/devtools": "^3.0.0",
+    "@nuxtjs/tailwindcss": "^6.14.0",
     "@pinia/nuxt": "^0.11.2",
-    "nuxt": "3.9",
+    "buffer": "^6.0.3",
+    "fetch-blob": "^4.0.0",
     "pinia": "^3.0.3",
+    "undici": "^7.16.0",
     "vue": "^3.5.22",
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "@types/node": "^24.9.1",
+    "formdata-node": "^6.0.3",
+    "node-fetch": "^3.3.2",
+    "nuxt": "^4.2.0",
     "sass": "^1.93.2",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite-tsconfig-paths": "^5.1.4"
   }
 }

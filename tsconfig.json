@@ -1,12 +1,19 @@
-{
-  "extends": "./.nuxt/tsconfig.json",
+
+ {
   "compilerOptions": {
-    "types": ["nuxt", "node"]
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Node",
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["app/*"],
+      "@/*": ["app/*"],
+      "#app": [".nuxt/types/app"],
+      "#app/*": [".nuxt/types/app/*"]
+    },
+    "types": ["node", "nuxt"]
   },
-  "exclude": [
-    ".nuxt",
-    "node_modules",
-    "dist",
-    "pages/reward"   
-  ]
+  "include": ["app/**/*", "types/**/*.d.ts"],
+  "exclude": ["node_modules", ".nuxt", "dist"]
 }

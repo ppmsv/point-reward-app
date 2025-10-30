@@ -1,23 +1,24 @@
-# ใช้ Node 20 LTS
+# ใช้ Node 20
 FROM node:20
 
 # ตั้ง working directory
 WORKDIR /app
 
-# คัดลอก package.json และ package-lock.json
+
 COPY package*.json ./
 
-# ติดตั้ง dependencies
+
 RUN npm install
 
-# คัดลอกไฟล์โปรเจกต์ทั้งหมด
+
 COPY . .
 
-# Build สำหรับ production
-RUN npm run build
-
-# expose port 3000
+ 
 EXPOSE 3000
 
-# รัน Nuxt preview (production)
-CMD ["npm", "run", "preview"]
+# ตั้งค่าให้ dev server รับ request จากภายนอก container
+ENV HOST=0.0.0.0
+ENV PORT=3000
+
+# รันโหมดพัฒนา
+CMD ["npm", "run", "dev"]
