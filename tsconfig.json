@@ -1,19 +1,16 @@
-
- {
+{
   "compilerOptions": {
     "target": "ESNext",
     "module": "ESNext",
     "moduleResolution": "Node",
-    "strict": true,
-    "baseUrl": ".",
+    "types": ["@types/node", "nuxt"],
     "paths": {
-      "~/*": ["app/*"],
-      "@/*": ["app/*"],
-      "#app": [".nuxt/types/app"],
-      "#app/*": [".nuxt/types/app/*"]
+      "~/*": ["./app/*"],
+      "@/*": ["./app/*"]
     },
-    "types": ["node", "nuxt"]
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
   },
-  "include": ["app/**/*", "types/**/*.d.ts"],
   "exclude": ["node_modules", ".nuxt", "dist"]
 }

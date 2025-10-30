@@ -1,5 +1,8 @@
 // middleware/auth.global.ts
-import { useAuthStore } from '~/stores/auth'
+import { useAuthStore } from '../stores/auth'
+
+declare function defineNuxtRouteMiddleware(fn: (to: any) => any): any
+declare function navigateTo(path: string): any
 
 export default defineNuxtRouteMiddleware((to) => {
   if (process.client) {

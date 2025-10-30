@@ -10,7 +10,7 @@
       <!-- User Info Card -->
       <div class="user-card">
         <div class="avatar">
-          <span>{{ auth.username[0].toUpperCase() }}</span>
+          <span>{{ auth.username?.[0]?.toUpperCase() ?? '?' }}</span>
         </div>
         <div class="user-info">
           <p class="username">{{ auth.username }}</p>
@@ -40,7 +40,7 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '~/stores/auth'
+import { useAuthStore } from '../stores/auth'
 import { useRouter } from 'vue-router'
 
 const auth = useAuthStore()

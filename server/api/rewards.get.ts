@@ -1,4 +1,5 @@
 // server/api/rewards.get.ts
+import { defineEventHandler } from 'h3'
 export default defineEventHandler(() => {
   return [
     { id: 1, name: 'Free Coffee', description: 'Free small coffee', points: 20, image: '/coffee.png', expiry: '2025-12-31', condition: '1 per user' },

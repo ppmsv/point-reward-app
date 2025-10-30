@@ -68,8 +68,8 @@
 <script lang="ts" setup>
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import { useAuthStore } from '~/stores/auth'
-import { useCookie } from '#app'
+import { useAuthStore } from '../stores/auth'
+import { useCookie } from 'nuxt/app'
 
 const router = useRouter()
 const authStore = useAuthStore()
@@ -95,10 +95,11 @@ const login = async () => {
 </script>
 
 <style lang="scss">
+@import '~/assets/scss/_variables.scss';   
 @import '~/assets/scss/pages/_login';
 @import '~/assets/scss/_login_grid.scss';
 @import '~/assets/scss/pages/_login.scss';
-@import '~/assets/scss/_variables.scss';
+
 
 /* Global Styles */
 :global(body) {

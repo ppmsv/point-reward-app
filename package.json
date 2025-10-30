@@ -19,7 +19,8 @@
     "vue-router": "^4.6.3"
   },
   "devDependencies": {
-    "@types/node": "^24.9.1",
+    "@nuxt/types": "^2.18.1",
+    "@types/node": "^24.9.2",
     "formdata-node": "^6.0.3",
     "node-fetch": "^3.3.2",
     "nuxt": "^4.2.0",

@@ -7,6 +7,7 @@
 <script setup lang="ts">
 import { useRouter, useRoute } from 'vue-router'
 import { useAuthStore } from '~/stores/auth'
+import { onMounted } from 'vue'     
 
 const router = useRouter()
 const route = useRoute()

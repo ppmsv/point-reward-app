@@ -1,5 +1,10 @@
 import { defineStore } from 'pinia'
-import { useCookie } from '#app'
+
+// ตัวแปรเช็ค client side
+const isClient = typeof window !== 'undefined'
+
+// TypeScript ไม่รู้จัก useCookie เราจะ declare ให้ TS รู้
+declare function useCookie(name: string, options?: { path?: string }): { value: string | null }
 
 export const useAuthStore = defineStore('auth', {
   state: () => ({
@@ -11,8 +16,7 @@ export const useAuthStore = defineStore('auth', {
   }),
 
   actions: {
-    // Authenticate user (mock)
-    async authenticateUser(user: { username: string; password: string }): Promise<boolean> {
+     async authenticateUser(user: { username: string; password: string }): Promise<boolean> {
       if (user.username === 'usertest' && user.password === 'passwordtest') {
         this.token = 'JWT_MOCK_TOKEN'
         this.username = user.username
@@ -20,7 +24,7 @@ export const useAuthStore = defineStore('auth', {
 
         this.saveToCookie()
 
-        if (process.client) {
+        if (isClient) {
           localStorage.setItem('authenticated', 'true')
         }
 
@@ -28,8 +32,7 @@ export const useAuthStore = defineStore('auth', {
       }
       return false
     },
-
-    // Logout user
+ 
     logout() {
       this.token = null
       this.username = ''
@@ -39,30 +42,32 @@ export const useAuthStore = defineStore('auth', {
 
       this.saveToCookie()
 
-      if (process.client) {
+      if (isClient) {
         localStorage.removeItem('points')
         localStorage.removeItem('redeemedIds')
         localStorage.removeItem('authenticated')
       }
     },
-
-    // Load state from cookie
+ 
     loadFromCookie() {
-      const cookie = document.cookie.split('; ').find(row => row.startsWith('auth='))
-      if (cookie) {
+      const cookieValue = document.cookie
+        .split('; ')
+        .find(row => row.startsWith('auth='))
+        ?.split('=')[1]
+
+      if (cookieValue) {
         try {
-          const data = JSON.parse(cookie.split('=')[1])
+          const data = JSON.parse(cookieValue)
           this.$patch(data)
           if (this.token) this.authenticated = true
-        } catch (e) {
+        } catch {
           console.error('Invalid auth cookie')
         }
       }
     },
-
-    // Load state from cookie or localStorage
+ 
     async loadFromCookieOrStorage() {
-      if (process.client) {
+      if (isClient) {
         const pointsLS = localStorage.getItem('points')
         const redeemedLS = localStorage.getItem('redeemedIds')
         const tokenCookie = useCookie('token').value
@@ -88,21 +93,19 @@ export const useAuthStore = defineStore('auth', {
         this.authenticated = !!tokenCookie || authenticatedLS === 'true'
       }
     },
-
-    // Save state to cookie and localStorage
+ 
     saveToCookie() {
       useCookie('points', { path: '/' }).value = String(this.points)
       useCookie('redeemedIds', { path: '/' }).value = JSON.stringify(this.redeemedIds)
       useCookie('username', { path: '/' }).value = this.username
       useCookie('token', { path: '/' }).value = this.token
 
-      if (process.client) {
+      if (isClient) {
         localStorage.setItem('points', String(this.points))
         localStorage.setItem('redeemedIds', JSON.stringify(this.redeemedIds))
       }
     },
-
-    // Redeem a reward
+ 
     redeemReward(id: number, cost: number): boolean {
       if (this.points < cost || this.redeemedIds.includes(id)) return false
 
@@ -112,8 +115,7 @@ export const useAuthStore = defineStore('auth', {
       return true
     },
 
-    // Check if reward already redeemed
-    hasRedeemed(id: number): boolean {
+     hasRedeemed(id: number): boolean {
       return this.redeemedIds.includes(id)
     },
   },
